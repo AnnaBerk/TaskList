@@ -31,7 +31,7 @@ export default {
 <style lang="scss" scoped>
 nav{
     padding:0 3rem;
-  
+    
 }
 </style>
 
