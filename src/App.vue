@@ -18,6 +18,6 @@ export default {
 <style lang="scss">
 @import "~materialize-css/dist/css/materialize.min.css";
 html{
-font-size: 28px;
+
 }
 </style>
