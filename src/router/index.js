@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Create from '../views/Create.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Create
+    name: 'create',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Create.vue')
   },
   {
     path: '/list',
