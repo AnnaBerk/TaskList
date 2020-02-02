@@ -14,6 +14,9 @@
           <label for="textarea1">Textarea</label>
           <span class="character-counter" style="float: right; font-size: 12px;">{{description.length}}/1800</span>
         </div>
+        
+  <input type="text" ref="datepicker">
+        
       </form>
     </div>
   </div>
@@ -34,6 +37,12 @@ export default {
     M.Chips.init(this.$refs.chips, {
       placeholder:'Task tags'
     })
+    // eslint-disable-next-line no-undef
+    M.Datepicker.init(this.$refs.datepicker,{
+      format: 'dd.mm.yyyy',
+      defaultDate:new Date(),
+      setDefaultDate: true    
+    });
 
   }
  
