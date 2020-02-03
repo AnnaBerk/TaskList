@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col s6 offset-s3">
       <h1>Create task</h1>
-      <form>
+      <form @submit.prevent="submitHandler">
          <div class="input-field">
           <input v-model="title" id="title" type="text" class="validate" required>
           <label for="title">Title</label>
@@ -16,6 +16,7 @@
         </div>
         
   <input type="text" ref="datepicker">
+  <button class="btn" type="submit">Create task</button>
         
       </form>
     </div>
@@ -30,20 +31,42 @@ export default {
   name: 'create',
   data:()=>({
     description:'',
-    title:''
+    title:'',
+    chips:null,
+    date:null,
   }),
   mounted(){
     // eslint-disable-next-line no-undef
-    M.Chips.init(this.$refs.chips, {
+    this.chips = M.Chips.init(this.$refs.chips, {
       placeholder:'Task tags'
     })
     // eslint-disable-next-line no-undef
-    M.Datepicker.init(this.$refs.datepicker,{
+    this.date = M.Datepicker.init(this.$refs.datepicker,{
       format: 'dd.mm.yyyy',
       defaultDate:new Date(),
       setDefaultDate: true    
     });
-
+  },
+  methods:{
+    submitHandler(){
+      const task = {
+        title:this.title,
+        description:this.description,
+        id:Date.now(),
+        status:'active',
+        tags:this.chips.chipsData,
+        date: this.date.date
+      }
+      this.$store.dispatch('createTask', task)
+    }
+  },
+  destroyed(){
+    if(this.date && this.date.destroy){
+      this.date.destroy()
+    }
+    if(this.chips && this.chips.destroy){
+      this.chips.destroy()
+    }
   }
  
 }
