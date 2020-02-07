@@ -21,7 +21,7 @@
     <td>{{new Date(task.date).toLocaleDateString()}}</td>
     <td class="description-cell"><div class="description">{{task.description}}</div></td>
     <td>{{task.status}}</td>
-    <router-link tag="button" class="btn btn-small" :to="'/task/'+task.id">
+    <router-link tag="button" class="btn btn-small" :to="'/task/'+ task.id">
       Open
     </router-link>
   </tr>
@@ -38,8 +38,9 @@
 export default {
   computed:{
     tasks(){
+      
       return this.$store.getters.tasks
-    }
+   }
   }
   
 }

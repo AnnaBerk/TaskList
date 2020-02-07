@@ -12,15 +12,31 @@ export default new Vuex.Store({
       state.tasks.push(task)
 
       localStorage.setItem('tasks', JSON.stringify(state.tasks))
+    },
+    updateTask(state, {id, description, date}){
+      const tasks = state.tasks.concat()
+
+      const ind = tasks.findIndex(t=>t.id ===id)
+      const task = tasks[ind]
+
+      const status = new Date(date)>new Date()? 'active':'outdated'
+      tasks[ind] = {...task, date, description, status}
+
+      state.tasks = tasks
+      localStorage.setItem('tasks', JSON.stringify(state.tasks))
     }
   },
   actions: {
     createTask({commit},task){
       commit('createTask',task)
+    },
+    updateTask({commit},task){
+      commit('updateTask',task)
     }
   },
   getters: {
-    tasks: s => s.tasks
+    tasks: s => s.tasks,
+    taskById:s => id => s.tasks.find(t =>t.id === id)
   },
   modules: {
   }
