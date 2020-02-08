@@ -13,8 +13,10 @@
         </div>
         
   <input type="text" ref="datepicker">
-  <button class="btn" type="submit" style="margin-right:1rem">Update</button>
-   <button class="btn blue" type="button">Complete task</button>     
+  <div v-if="task.status !== 'completed'">
+      <button class="btn" type="submit" style="margin-right:1rem">Update</button>
+      <button class="btn blue" type="button" v-on:click="completeTask">Complete task</button>     
+   </div>
       </form>
   </div>
   <p v-else>Task not found</p>
@@ -64,7 +66,12 @@ computed:{
      })
    
       this.$router.push('/list')
-    }
+    },
+  
+  completeTask(){
+    this.$store.dispatch('completeTask',this.task.id)
+    this.$router.push('/list')
+  }
   },
   destroyed(){
     if(this.date && this.date.destroy){
