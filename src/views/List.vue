@@ -12,6 +12,7 @@
     <label >Status filter</label>
 </div> 
 </div>
+<button v-if="filter" class="btn btn-small" @click="filter = null">Clear filter</button>
    <hr>
    <table v-if="tasks.length">
 <thead>
